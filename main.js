@@ -12,6 +12,8 @@ function createWindow() {
     resizable: false,
   });
 
+  win.setVisibleOnAllWorkspaces(true);
+
   win.loadFile("index.html");
 }
 
