@@ -14,6 +14,7 @@
         --border: #d1d5da;
         --accent: #0366d6;
         --bg: #ffffff;
+        --bg-secondary: #f6f8fa;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -22,6 +23,7 @@
           --text-secondary: #8b949e;
           --border: #6e7681;
           --bg: #0d1117;
+          --bg-secondary: #161b22;
         }
       }
 
@@ -56,9 +58,25 @@
         outline: none;
       }
 
+      #checkbox:hover {
+        background-color: var(--bg-secondary);
+      }
+
       #checkbox:checked {
         background-color: var(--accent);
         border-color: var(--accent);
+      }
+
+      #checkbox-icon {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      #checkbox:checked + #checkbox-icon {
+        visibility: visible;
       }
 
       #checkbox:checked ~ #input:not(:placeholder-shown) {
@@ -78,31 +96,6 @@
         color: inherit;
         background-color: transparent;
         cursor: default;
-      }
-
-      #checkbox-icon {
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        visibility: hidden;
-        pointer-events: none;
-      }
-
-      #checkbox:checked + #checkbox-icon {
-        visibility: visible;
-      }
-
-      #checkbox:checked + #checkbox-icon path {
-        --line-length: 13;
-        stroke-dashoffset: var(--line-length);
-        stroke-dasharray: var(--line-length);
-        animation: reveal 200ms ease-in 0s forwards;
-      }
-
-      @keyframes reveal {
-        to {
-          stroke-dashoffset: 0;
-        }
       }
     </style>
   </head>
