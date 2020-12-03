@@ -1,5 +1,8 @@
 const { app, BrowserWindow } = require("electron");
 
+// TODO: add tray
+// TODO: hide dock icon
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 300,
