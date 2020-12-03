@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <style>
+      :root {
+        --text: #24292e;
+        --text-secondary: #6a737d;
+        --border: #d1d5da;
+        --accent: #0366d6;
+        --bg: #ffffff;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text: #c9d1d9;
+          --text-secondary: #8b949e;
+          --border: #6e7681;
+          --bg: #0d1117;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      body {
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
+        margin: 0;
+        height: 100vh;
+        font-family: system-ui, sans-serif;
+        box-sizing: border-box;
+        color: var(--text);
+        background-color: var(--bg);
+      }
+
+      #checkbox {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        margin: 0;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        cursor: pointer;
+        appearance: none;
+        outline: none;
+      }
+
+      #checkbox:checked {
+        background-color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      #checkbox:checked ~ #input:not(:placeholder-shown) {
+        color: var(--text-secondary);
+        text-decoration: line-through;
+      }
+
+      #input {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 16px 16px 16px 48px;
+        font-size: inherit;
+        font-family: inherit;
+        border: 0;
+        outline: none;
+        color: inherit;
+        background-color: transparent;
+        cursor: default;
+      }
+
+      #checkbox-icon {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      #checkbox:checked + #checkbox-icon {
+        visibility: visible;
+      }
+
+      #checkbox:checked + #checkbox-icon path {
+        --line-length: 13;
+        stroke-dashoffset: var(--line-length);
+        stroke-dasharray: var(--line-length);
+        animation: reveal 200ms ease-in 0s forwards;
+      }
+
+      @keyframes reveal {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <input id="checkbox" type="checkbox" />
+    <svg
+      id="checkbox-icon"
+      viewBox="0 0 16 16"
+      width="16"
+      height="16"
+      fill="none"
+    >
+      <path
+        xmlns="http://www.w3.org/2000/svg"
+        d="M4.75 8.25L6.1183 10.9866C6.28917 11.3283 6.7647 11.3599 6.97925 11.0437L11.25 4.75"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+    <input
+      id="input"
+      type="text"
+      placeholder="What's your intention?"
+      spellcheck="false"
+    />
+    <script>
+      let timeout;
+      const checkbox = document.getElementById("checkbox");
+      const input = document.getElementById("input");
+
+      checkbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+          timeout = setTimeout(() => {
+            event.target.checked = false;
+            input.value = "";
+            input.focus();
+          }, 1000);
+        } else {
+          clearTimeout(timeout);
+        }
+      });
+    </script>
+  </body>
+</html>
