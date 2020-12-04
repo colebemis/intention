@@ -1,5 +1,5 @@
 {
-  "name": "intention",
+  "name": "do1thing",
   "version": "1.0.0",
   "scripts": {
     "start": "electron-forge start",
@@ -27,7 +27,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "intention"
+            "name": "do1thing"
           }
         },
         {
