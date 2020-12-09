@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
     <meta
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline';"
@@ -14,7 +13,6 @@
         --border: #d1d5da;
         --accent: #0366d6;
         --bg: #ffffff;
-        --bg-secondary: #f6f8fa;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -22,8 +20,7 @@
           --text: #c9d1d9;
           --text-secondary: #8b949e;
           --border: #6e7681;
-          --bg: #0d1117;
-          --bg-secondary: #161b22;
+          --bg: #21262d;
         }
       }
 
@@ -56,10 +53,6 @@
         cursor: pointer;
         appearance: none;
         outline: none;
-      }
-
-      #checkbox:hover {
-        background-color: var(--bg-secondary);
       }
 
       #checkbox:checked {
@@ -123,21 +116,22 @@
       spellcheck="false"
     />
     <script>
-      let timeout;
-      const checkbox = document.getElementById("checkbox");
-      const input = document.getElementById("input");
+      const checkbox = document.getElementById('checkbox')
+      const input = document.getElementById('input')
 
-      checkbox.addEventListener("change", (event) => {
+      let timeout
+
+      checkbox.addEventListener('change', (event) => {
         if (event.target.checked) {
           timeout = setTimeout(() => {
-            event.target.checked = false;
-            input.value = "";
-            input.focus();
-          }, 1000);
+            event.target.checked = false
+            input.value = ''
+            input.focus()
+          }, 1000)
         } else {
-          clearTimeout(timeout);
+          clearTimeout(timeout)
         }
-      });
+      })
     </script>
   </body>
 </html>
