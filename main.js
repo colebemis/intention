@@ -1,7 +1,5 @@
-const { app, BrowserWindow } = require("electron");
-
-// TODO: add tray
-// TODO: hide dock icon
+const path = require('path')
+const { app, BrowserWindow, Tray, Menu } = require('electron')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -13,23 +11,38 @@ function createWindow() {
     frame: false,
     alwaysOnTop: true,
     resizable: false,
-  });
+  })
 
-  win.setVisibleOnAllWorkspaces(true);
+  win.setVisibleOnAllWorkspaces(true)
 
-  win.loadFile("index.html");
+  win.loadFile('index.html')
+
+  return win
 }
 
-app.whenReady().then(createWindow);
+let tray
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
+function createTray(win) {
+  const contextMenu = Menu.buildFromTemplate([
+    { role: 'quit', accelerator: 'Command+Q' },
+  ])
 
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+  tray = new Tray(path.join(__dirname, './images/IconTemplate.png'))
+  tray.setIgnoreDoubleClickEvents(true)
+  tray.on('click', () => (win.isVisible() ? win.hide() : win.show()))
+  tray.on('right-click', () => tray.popUpContextMenu(contextMenu))
+}
+
+app.whenReady().then(() => {
+  const win = createWindow()
+
+  createTray(win)
+
+  app.dock.hide()
+})
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
-});
+})
