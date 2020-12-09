@@ -20,6 +20,11 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "electron": "^11.0.3"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "config": {
     "forge": {
       "packagerConfig": {},
